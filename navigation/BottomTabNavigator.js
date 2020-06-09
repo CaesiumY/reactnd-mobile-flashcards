@@ -23,7 +23,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="Decks"
         component={HomeScreen}
         options={{
           title: "Decks",
@@ -51,7 +51,7 @@ function getHeaderTitle(route) {
     route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case "Home":
+    case "Decks":
       return "How to get started";
     case "Add":
       return "Add a New Deck";

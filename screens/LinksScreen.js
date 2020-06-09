@@ -1,74 +1,56 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { Ionicons } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import React, { Component } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function LinksScreen() {
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <OptionButton
-        icon="md-school"
-        label="Read the Expo documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
-      />
+import TextButton from "../components/TextButton";
+import InputLayout from "../components/InputLayout";
 
-      <OptionButton
-        icon="md-compass"
-        label="Read the React Navigation documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://reactnavigation.org')}
-      />
+export class LinksScreen extends Component {
+  state = {
+    value: "",
+  };
 
-      <OptionButton
-        icon="ios-chatboxes"
-        label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
-        isLastOption
-      />
-    </ScrollView>
-  );
-}
+  onChangeText = (value) => {
+    console.log("LinksScreen -> onChangeText -> value", value);
+    this.setState({ value });
+  };
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
-  return (
-    <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.optionIconContainer}>
-          <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
+  onSubmit = () => {
+    // TODO - save title to asyncStorage
+
+    console.log(this.state.value);
+    this.props.navigation.navigate("Decks");
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.title}>What is the title of your new deck?</Text>
+          <InputLayout
+            placeholder="Deck Title"
+            onChangeText={this.onChangeText}
+            value={this.state.value}
+          ></InputLayout>
         </View>
-        <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{label}</Text>
-        </View>
+        <TextButton onPress={this.onSubmit}>Create</TextButton>
       </View>
-    </RectButton>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    justifyContent: "space-between",
+    padding: 20,
   },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  optionIconContainer: {
-    marginRight: 12,
-  },
-  option: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: '#ededed',
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  optionText: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
+  title: {
+    textAlign: "center",
+    fontSize: 35,
+    fontWeight: "bold",
   },
 });
+
+export default LinksScreen;
