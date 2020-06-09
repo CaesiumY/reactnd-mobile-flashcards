@@ -1,18 +1,16 @@
-import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import TextButton from "../components/TextButton";
 import InputLayout from "../components/InputLayout";
 
-export class LinksScreen extends Component {
+export class AddDeckScreen extends Component {
   state = {
     value: "",
   };
 
   onChangeText = (value) => {
-    console.log("LinksScreen -> onChangeText -> value", value);
+    console.log("AddDeckScreen -> onChangeText -> value", value);
     this.setState({ value });
   };
 
@@ -53,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LinksScreen;
+export default AddDeckScreen;

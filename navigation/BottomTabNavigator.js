@@ -3,7 +3,7 @@ import * as React from "react";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
+import AddDeckScreen from "../screens/AddDeckScreen";
 import Colors from "../constants/Colors";
 
 const BottomTab = createBottomTabNavigator();
@@ -34,7 +34,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Add"
-        component={LinksScreen}
+        component={AddDeckScreen}
         options={{
           title: "Add a Deck",
           tabBarIcon: ({ focused }) => (
