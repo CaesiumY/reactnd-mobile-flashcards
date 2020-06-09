@@ -4,6 +4,7 @@ import * as React from "react";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
+import Colors from "../constants/Colors";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -15,7 +16,12 @@ export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator
+      initialRouteName={INITIAL_ROUTE_NAME}
+      tabBarOptions={{
+        activeTintColor: Colors.tabIconSelected,
+      }}
+    >
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
@@ -48,6 +54,6 @@ function getHeaderTitle(route) {
     case "Home":
       return "How to get started";
     case "Add":
-      return "Links to learn more";
+      return "Add a New Deck";
   }
 }
