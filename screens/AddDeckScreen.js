@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 
 import TextButton from "../components/TextButton";
 import InputLayout from "../components/InputLayout";
+import { connect } from "react-redux";
+import { createDeck } from "../actions";
 
 export class AddDeckScreen extends Component {
   state = {
@@ -10,14 +12,19 @@ export class AddDeckScreen extends Component {
   };
 
   onChangeText = (value) => {
-    console.log("AddDeckScreen -> onChangeText -> value", value);
     this.setState({ value });
   };
 
   onSubmit = () => {
+    const { dispatch } = this.props;
+    const { value } = this.state;
+
+    dispatch(createDeck(value));
+
     // TODO - save title to asyncStorage
 
-    console.log(this.state.value);
+    console.log("value:", this.state.value);
+    this.setState({ value: "" });
     this.props.navigation.navigate("Decks");
   };
 
@@ -53,4 +60,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDeckScreen;
+const mapStateToProps = (decks) => {
+  return {
+    decks,
+  };
+};
+
+export default connect(mapStateToProps)(AddDeckScreen);

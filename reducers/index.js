@@ -7,11 +7,12 @@ import {
 import { sampleState } from "../utils/helpers";
 
 function decks(state = sampleState, action) {
+  const { decks, id, title, question } = action;
   switch (action.type) {
     case GET_DECKS_DATA:
       return {
         ...state,
-        ...action.decks,
+        ...decks,
       };
     case GET_DECK:
       return state[id];
@@ -19,7 +20,7 @@ function decks(state = sampleState, action) {
       return {
         ...state,
         [title]: {
-          title: [title],
+          title: title,
           questions: [],
         },
       };
