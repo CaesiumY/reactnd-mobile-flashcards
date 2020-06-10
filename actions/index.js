@@ -4,9 +4,10 @@ export const GET_DECK = "GET_DECK";
 export const CREATE_DECK = "CREATE_DECK";
 export const CREATE_QUESTION = "CREATE_QUESTION";
 
-export function getDecksData() {
+export function getDecksData(decks) {
   return {
     type: GET_DECKS_DATA,
+    decks,
   };
 }
 
@@ -24,9 +25,10 @@ export function createDeck(title) {
   };
 }
 
-export function createQuestion(question) {
+export function createQuestion(title, question) {
   return {
     type: CREATE_QUESTION,
-    question,
+    title, // selected deck title
+    question, // object {title, answer}
   };
 }

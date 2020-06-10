@@ -4,17 +4,39 @@ import {
   CREATE_DECK,
   CREATE_QUESTION,
 } from "../actions";
+import { sampleState } from "../utils/helpers";
 
-function decks(state = {}, action) {
+function decks(state = sampleState, action) {
   switch (action.type) {
     case GET_DECKS_DATA:
-      return state;
+      return {
+        ...state,
+        ...action.decks,
+      };
     case GET_DECK:
-      return state;
+      return state[id];
     case CREATE_DECK:
-      return state;
+      return {
+        ...state,
+        [title]: {
+          title: [title],
+          questions: [],
+        },
+      };
     case CREATE_QUESTION:
-      return state;
+      return {
+        ...state,
+        [title]: {
+          ...state[title],
+          questions: [
+            ...state[title].questions,
+            {
+              question: [question.title],
+              answer: [question.answer],
+            },
+          ],
+        },
+      };
 
     default:
       return state;
