@@ -12,3 +12,5 @@ export default {
   noticeBackground: tintColor,
   noticeText: "#fff",
 };
+
+export const colorList = ["#a29bfe", "#6c5ce7", "#9c88ff", "#8c7ae6"];
