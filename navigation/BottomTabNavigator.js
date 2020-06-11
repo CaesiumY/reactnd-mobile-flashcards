@@ -5,7 +5,7 @@ import * as React from "react";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import AddDeckScreen from "../screens/AddDeckScreen";
-import Colors from "../constants/Colors";
+import Colors, { tintColor } from "../constants/Colors";
 import DeckScreen from "../screens/DeckScreen";
 
 const BottomTab = createBottomTabNavigator();
@@ -26,6 +26,11 @@ function DeckStackScreen() {
         component={DeckScreen}
         options={({ route }) => ({
           title: route.params.title,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: tintColor,
+          },
         })}
       />
     </DeckStack.Navigator>
