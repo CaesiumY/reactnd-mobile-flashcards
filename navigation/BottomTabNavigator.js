@@ -5,9 +5,10 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import AddDeckScreen from "../screens/AddDeckScreen";
 import Colors from "../constants/Colors";
+import DeckStackNavigation from "./DeckStackNavigation";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = "Decks";
+const INITIAL_ROUTE_NAME = "Home";
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -23,9 +24,19 @@ export default function BottomTabNavigator({ navigation, route }) {
     >
       <BottomTab.Screen
         name="Decks"
-        component={HomeScreen}
+        component={DeckStackNavigation}
         options={{
           title: "Decks",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-bookmarks" />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: "Home",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-bookmarks" />
           ),

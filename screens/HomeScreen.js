@@ -6,21 +6,23 @@ import { colorList } from "../constants/Colors";
 
 export class HomeScreen extends Component {
   render() {
-    const { titles } = this.props;
+    const { DeckTitles, navigation } = this.props;
+    console.log("HomeScreen -> render -> this.props", this.props);
+
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          {titles.map((title, index) => (
+          {DeckTitles.map((title, index) => (
             <TouchableOpacity
               key={`${title}-${index}`}
               style={[
                 styles.buttonList,
                 { backgroundColor: colorList[index % colorList.length] },
               ]}
-              onPress={() => console.log("pushed", title)}
+              onPress={() => navigation.navigate("Deck", { title })}
             >
               <Text style={styles.buttonText}>{title}</Text>
             </TouchableOpacity>
@@ -51,9 +53,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (decks) => {
-  const titles = Object.keys(decks);
+  console.log("mapStateToProps -> decks", decks);
+  const DeckTitles = Object.keys(decks);
+  const test = "test";
   return {
-    titles,
+    DeckTitles,
+    test,
   };
 };
 
