@@ -1,3 +1,4 @@
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 
@@ -5,10 +6,31 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import AddDeckScreen from "../screens/AddDeckScreen";
 import Colors from "../constants/Colors";
-import DeckStackNavigation from "./DeckStackNavigation";
+import DeckScreen from "../screens/DeckScreen";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = "Home";
+const DeckStack = createStackNavigator();
+
+function DeckStackScreen() {
+  return (
+    <DeckStack.Navigator initialRouteName="Home" headerMode="screen">
+      <DeckStack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <DeckStack.Screen
+        name="Deck"
+        component={DeckScreen}
+        options={({ route }) => ({
+          title: route.params.title,
+        })}
+      />
+    </DeckStack.Navigator>
+  );
+}
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -17,26 +39,16 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator
-      initialRouteName={INITIAL_ROUTE_NAME}
+      initialRouteName="Decks"
       tabBarOptions={{
         activeTintColor: Colors.tabIconSelected,
       }}
     >
       <BottomTab.Screen
         name="Decks"
-        component={DeckStackNavigation}
+        component={DeckStackScreen}
         options={{
           title: "Decks",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-bookmarks" />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: "Home",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-bookmarks" />
           ),

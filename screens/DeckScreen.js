@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 export class DeckScreen extends Component {
   render() {
     const { title, deck } = this.props;
+    console.log("DeckScreen -> render -> this.props", this.props);
     return (
-      <View>
+      <View style={{ justifyContent: "center" }}>
         <Text> {title} </Text>
         <Text>{JSON.stringify(deck)}</Text>
       </View>
@@ -16,10 +17,14 @@ export class DeckScreen extends Component {
 
 const styles = StyleSheet.create({});
 
-const mapStateToProps = (decks, { title }) => {
+const mapStateToProps = (decks, { route }) => {
+  const { title } = route.params;
   const deck = decks[title];
+  console.log("mapStateToProps -> decks", decks);
+
   return {
     deck,
+    title,
   };
 };
 
