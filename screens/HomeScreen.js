@@ -7,7 +7,6 @@ import { colorList } from "../constants/Colors";
 export class HomeScreen extends Component {
   render() {
     const { DeckTitles, navigation } = this.props;
-    console.log("HomeScreen -> render -> this.props", this.props);
 
     return (
       <View style={styles.container}>
@@ -55,12 +54,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (decks) => {
-  console.log("mapStateToProps -> decks", decks);
   const DeckTitles = Object.keys(decks);
-  const test = "test";
   return {
     DeckTitles,
-    test,
   };
 };
 

@@ -19,11 +19,12 @@ export default TextButton;
 const styles = StyleSheet.create({
   button: {
     padding: 10,
+    borderRadius: 3,
+    marginBottom: 10,
   },
   buttonText: {
     color: "white",
     textAlign: "center",
     fontSize: 23,
-    borderRadius: 5,
   },
 });
