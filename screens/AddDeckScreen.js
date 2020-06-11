@@ -9,6 +9,7 @@ import { createDeck } from "../actions";
 export class AddDeckScreen extends Component {
   state = {
     value: "",
+    errorMessage: "",
   };
 
   onChangeText = (value) => {
@@ -16,19 +17,31 @@ export class AddDeckScreen extends Component {
   };
 
   onSubmit = () => {
-    const { dispatch } = this.props;
+    const { dispatch, titles } = this.props;
     const { value } = this.state;
+
+    if (value === "") {
+      return this.setState({
+        errorMessage: "Title is empty!",
+      });
+    }
+
+    if (titles.includes(value)) {
+      return this.setState({
+        errorMessage: "Title already exists!",
+      });
+    }
 
     dispatch(createDeck(value));
 
     // TODO - save title to asyncStorage
 
-    console.log("value:", this.state.value);
-    this.setState({ value: "" });
+    this.setState({ value: "", errorMessage: "" });
     this.props.navigation.navigate("Decks");
   };
 
   render() {
+    const { value, errorMessage } = this.state;
     return (
       <View style={styles.container}>
         <View>
@@ -36,8 +49,11 @@ export class AddDeckScreen extends Component {
           <InputLayout
             placeholder="Deck Title"
             onChangeText={this.onChangeText}
-            value={this.state.value}
+            value={value}
           ></InputLayout>
+          {errorMessage !== "" && (
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          )}
         </View>
         <TextButton onPress={this.onSubmit}>Create</TextButton>
       </View>
@@ -58,11 +74,19 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
   },
+  errorText: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "red",
+  },
 });
 
 const mapStateToProps = (decks) => {
+  const titles = Object.keys(decks);
   return {
     decks,
+    titles,
   };
 };
 
