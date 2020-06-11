@@ -20,8 +20,8 @@ export default function App(props) {
   } else {
     return (
       <Provider store={store}>
+        {/* <StatusBarComponent barStyle="light-content"></StatusBarComponent> */}
         <View style={styles.container}>
-          <StatusBarComponent barStyle="light-content"></StatusBarComponent>
           <NavigationContainer linking={LinkingConfiguration}>
             <BottomTabNavigator />
           </NavigationContainer>
