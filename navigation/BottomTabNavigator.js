@@ -7,6 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import AddDeckScreen from "../screens/AddDeckScreen";
 import Colors, { tintColor } from "../constants/Colors";
 import DeckScreen from "../screens/DeckScreen";
+import AddCardScreen from "../screens/AddCardScreen";
 
 const BottomTab = createBottomTabNavigator();
 const DeckStack = createStackNavigator();
@@ -24,6 +25,21 @@ function DeckStackScreen() {
       <DeckStack.Screen
         name="Deck"
         component={DeckScreen}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: tintColor,
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        })}
+      />
+      <DeckStack.Screen
+        name="AddCard"
+        component={AddCardScreen}
         options={({ route }) => ({
           title: route.params.title,
           headerTitleAlign: "center",

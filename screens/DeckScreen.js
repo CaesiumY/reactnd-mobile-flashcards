@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export class DeckScreen extends Component {
   render() {
-    const { deck, questionCount } = this.props;
+    const { deck, questionCount, navigation } = this.props;
 
     return (
       <View style={styles.container}>
@@ -21,7 +21,14 @@ export class DeckScreen extends Component {
           </Text>
         </View>
         <View>
-          <TextButton color="#a29bfe">Add Card</TextButton>
+          <TextButton
+            onPress={() =>
+              navigation.navigate("AddCard", { title: deck.title })
+            }
+            color="#a29bfe"
+          >
+            Add Card
+          </TextButton>
           <TextButton>Start Quiz</TextButton>
           <TouchableOpacity style={styles.removeButton}>
             <Text style={styles.removeButtonText}>Delete Deck</Text>
