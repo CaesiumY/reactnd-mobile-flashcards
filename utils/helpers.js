@@ -31,3 +31,5 @@ export function timeToString(time = Date.now()) {
   );
   return todayUTC.toISOString().split("T")[0];
 }
+
+// TODO - make notification
