@@ -12,6 +12,18 @@ import AddCardScreen from "../screens/AddCardScreen";
 const BottomTab = createBottomTabNavigator();
 const DeckStack = createStackNavigator();
 
+const defaultHeaderOptions = {
+  headerTitleAlign: "center",
+  headerTintColor: "white",
+  headerStyle: {
+    backgroundColor: tintColor,
+  },
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 25,
+  },
+};
+
 function DeckStackScreen() {
   return (
     <DeckStack.Navigator initialRouteName="Home" headerMode="screen">
@@ -27,26 +39,15 @@ function DeckStackScreen() {
         component={DeckScreen}
         options={({ route }) => ({
           title: route.params.title,
-          headerTitleAlign: "center",
-          headerTintColor: "white",
-          headerStyle: {
-            backgroundColor: tintColor,
-          },
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+          ...defaultHeaderOptions,
         })}
       />
       <DeckStack.Screen
         name="AddCard"
         component={AddCardScreen}
         options={({ route }) => ({
-          title: route.params.title,
-          headerTitleAlign: "center",
-          headerTintColor: "white",
-          headerStyle: {
-            backgroundColor: tintColor,
-          },
+          title: `Add Card in ${route.params.title}`,
+          ...defaultHeaderOptions,
         })}
       />
     </DeckStack.Navigator>
