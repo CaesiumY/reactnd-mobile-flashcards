@@ -63,10 +63,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   cardHeader: {
+    flex: 0.25,
+    justifyContent: "center",
     backgroundColor: tintColor,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    overflow: "hidden",
   },
   cardHeaderText: {
     color: "white",
