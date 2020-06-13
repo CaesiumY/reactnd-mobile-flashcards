@@ -7,10 +7,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 class QuizScreen extends Component {
   state = {
     currentIndex: 0,
+    currentSide: "front",
   };
 
   render() {
-    const { currentIndex } = this.state;
+    const { currentIndex, currentSide } = this.state;
     const { deck } = this.props;
     const { questions } = deck;
     return (
@@ -21,7 +22,7 @@ class QuizScreen extends Component {
           </View>
           <View style={styles.cardContent}>
             <TouchableOpacity
-              style={{ backgroundColor: "#999", flex: 1 }}
+              style={styles.cardContentButton}
               onPress={() => console.log("first")}
             >
               <Text style={styles.cardContentText}>
@@ -31,22 +32,16 @@ class QuizScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.cardButtonContainer}>
-            <TouchableOpacity
-              style={[
-                styles.cardButton,
-                { backgroundColor: "#27ae60", borderBottomLeftRadius: 20 },
-              ]}
-            >
-              <Text style={styles.cardButtonText}>Corrent</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.cardButton,
-                { backgroundColor: "#e74c3c", borderBottomRightRadius: 20 },
-              ]}
-            >
-              <Text style={styles.cardButtonText}>Incorrent</Text>
-            </TouchableOpacity>
+            <View style={styles.cardButton}>
+              <TouchableOpacity style={styles.correct}>
+                <Text style={styles.cardButtonText}>Corrent</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardButton}>
+              <TouchableOpacity style={styles.incorrect}>
+                <Text style={styles.cardButtonText}>Incorrent</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -85,24 +80,32 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
   },
+  cardContentButton: {},
   cardContentText: {
     fontSize: 30,
     textAlign: "center",
+    padding: 20,
   },
   cardContentSubText: {
     color: "gray",
     textAlign: "center",
-    padding: 10,
+    padding: 20,
   },
   cardButtonContainer: {
-    backgroundColor: "#999",
-    flex: 0.3,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
   cardButton: {
     flex: 1,
-    alignItems: "stretch",
+  },
+  correct: {
+    backgroundColor: "#27ae60",
+    borderBottomLeftRadius: 20,
+  },
+  incorrect: {
+    backgroundColor: "#e74c3c",
+    borderBottomRightRadius: 20,
   },
   cardButtonText: {
     textAlign: "center",
