@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import InputLayout from "../components/InputLayout";
 import TextButton from "../components/TextButton";
+import { connect } from "react-redux";
+import { createQuestion } from "../actions";
 
 export class AddCardScreen extends Component {
   state = {
@@ -19,6 +21,10 @@ export class AddCardScreen extends Component {
 
   onSubmit = () => {
     const { question, answer } = this.state;
+    const { dispatch, navigation, route } = this.props;
+
+    const title = route.params.title;
+
     if (question === "") {
       return this.setState({
         errorMessage: "Question is empty!",
@@ -30,10 +36,12 @@ export class AddCardScreen extends Component {
       });
     }
 
-    // dispatch(createDeck(value));
+    dispatch(createQuestion(title, { question, answer }));
+
     // // TODO - save title to asyncStorage
+
     this.setState({ question: "", answer: "", errorMessage: "" });
-    // this.props.navigation.navigate("Decks");
+    navigation.goBack();
   };
 
   render() {
@@ -86,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCardScreen;
+export default connect()(AddCardScreen);

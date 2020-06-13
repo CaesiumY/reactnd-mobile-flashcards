@@ -8,6 +8,7 @@ import { sampleState } from "../utils/helpers";
 
 function decks(state = sampleState, action) {
   const { decks, id, title, question } = action;
+  console.log(action);
   switch (action.type) {
     case GET_DECKS_DATA:
       return {
@@ -32,8 +33,8 @@ function decks(state = sampleState, action) {
           questions: [
             ...state[title].questions,
             {
-              question: [question.title],
-              answer: [question.answer],
+              question: question.question,
+              answer: question.answer,
             },
           ],
         },
