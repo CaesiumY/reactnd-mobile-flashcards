@@ -8,6 +8,7 @@ import AddDeckScreen from "../screens/AddDeckScreen";
 import Colors, { tintColor } from "../constants/Colors";
 import DeckScreen from "../screens/DeckScreen";
 import AddCardScreen from "../screens/AddCardScreen";
+import QuizScreen from "../screens/QuizScreen";
 
 const BottomTab = createBottomTabNavigator();
 const DeckStack = createStackNavigator();
@@ -47,6 +48,14 @@ function DeckStackScreen() {
         component={AddCardScreen}
         options={({ route }) => ({
           title: `Add Card in ${route.params.title}`,
+          ...defaultHeaderOptions,
+        })}
+      />
+      <DeckStack.Screen
+        name="Quiz"
+        component={QuizScreen}
+        options={({ route }) => ({
+          title: `${route.params.title} Quiz`,
           ...defaultHeaderOptions,
         })}
       />

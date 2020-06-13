@@ -12,6 +12,11 @@ export class DeckScreen extends Component {
     dispatch(deleteDeck(title));
   };
 
+  handleStart = () => {
+    const { navigation, title } = this.props;
+    navigation.navigate("Quiz", { title });
+  };
+
   render() {
     const { questionCount, navigation, title } = this.props;
 
@@ -34,7 +39,7 @@ export class DeckScreen extends Component {
           >
             Add Card
           </TextButton>
-          <TextButton>Start Quiz</TextButton>
+          <TextButton onPress={this.handleStart}>Start Quiz</TextButton>
           <TouchableOpacity
             style={styles.removeButton}
             onPress={this.handleDelete}
