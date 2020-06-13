@@ -3,10 +3,17 @@ import { Text, View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import TextButton from "../components/TextButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { deleteDeck } from "../actions";
 
 export class DeckScreen extends Component {
+  handleDelete = () => {
+    const { navigation, dispatch, title } = this.props;
+    navigation.popToTop();
+    dispatch(deleteDeck(title));
+  };
+
   render() {
-    const { deck, questionCount, navigation } = this.props;
+    const { questionCount, navigation, title } = this.props;
 
     return (
       <View style={styles.container}>
@@ -14,7 +21,7 @@ export class DeckScreen extends Component {
           <Text
             style={[styles.titleText, { fontSize: 50, fontWeight: "bold" }]}
           >
-            {deck.title}
+            {title}
           </Text>
           <Text style={[styles.titleText, { color: "gray" }]}>
             {questionCount} Cards
@@ -22,15 +29,16 @@ export class DeckScreen extends Component {
         </View>
         <View>
           <TextButton
-            onPress={() =>
-              navigation.navigate("AddCard", { title: deck.title })
-            }
+            onPress={() => navigation.navigate("AddCard", { title })}
             color="#a29bfe"
           >
             Add Card
           </TextButton>
           <TextButton>Start Quiz</TextButton>
-          <TouchableOpacity style={styles.removeButton}>
+          <TouchableOpacity
+            style={styles.removeButton}
+            onPress={this.handleDelete}
+          >
             <Text style={styles.removeButtonText}>Delete Deck</Text>
           </TouchableOpacity>
         </View>
@@ -75,8 +83,8 @@ const mapStateToProps = (decks, { route }) => {
   const questionCount = deck.questions.length;
 
   return {
-    deck,
     questionCount,
+    title,
   };
 };
 

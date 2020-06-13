@@ -3,12 +3,12 @@ import {
   GET_DECK,
   CREATE_DECK,
   CREATE_QUESTION,
+  DELETE_DECK,
 } from "../actions";
 import { sampleState } from "../utils/helpers";
 
 function decks(state = sampleState, action) {
   const { decks, id, title, question } = action;
-  console.log(action);
   switch (action.type) {
     case GET_DECKS_DATA:
       return {
@@ -40,6 +40,11 @@ function decks(state = sampleState, action) {
         },
       };
 
+    case DELETE_DECK:
+      delete state[action.title];
+      return {
+        ...state,
+      };
     default:
       return state;
   }
