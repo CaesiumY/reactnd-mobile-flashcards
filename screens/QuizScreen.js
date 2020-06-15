@@ -49,6 +49,10 @@ class QuizScreen extends Component {
         }
       }
     );
+
+    if (this.state.frontSide === false) {
+      this.handleFlip();
+    }
   };
 
   render() {
