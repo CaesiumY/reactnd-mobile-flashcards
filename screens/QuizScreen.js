@@ -7,11 +7,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 class QuizScreen extends Component {
   state = {
     currentIndex: 0,
-    currentSide: "front",
+    frontSide: true,
+  };
+
+  handleFlip = () => {
+    this.setState((state) => ({
+      frontSide: !state.frontSide,
+    }));
+  };
+
+  handleSubmit = (answer) => {
+    console.log("QuizScreen -> handleSubmit -> answer", answer);
   };
 
   render() {
-    const { currentIndex, currentSide } = this.state;
+    const { currentIndex, frontSide } = this.state;
     const { deck } = this.props;
     const { questions } = deck;
     return (
@@ -23,22 +33,36 @@ class QuizScreen extends Component {
           <View style={styles.cardContent}>
             <TouchableOpacity
               style={styles.cardContentButton}
-              onPress={() => console.log("first")}
+              onPress={this.handleFlip}
             >
-              <Text style={styles.cardContentText}>
-                {questions[currentIndex].question}
-              </Text>
+              {frontSide === true ? (
+                <Text style={styles.cardContentText}>
+                  {questions[currentIndex].question}
+                </Text>
+              ) : (
+                <Text
+                  style={[styles.cardContentText, styles.cardContentAnswerText]}
+                >
+                  {questions[currentIndex].answer}
+                </Text>
+              )}
               <Text style={styles.cardContentSubText}>Touch to Flip!</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cardButtonContainer}>
             <View style={styles.cardButton}>
-              <TouchableOpacity style={styles.correct}>
+              <TouchableOpacity
+                style={styles.correct}
+                onPress={this.handleSubmit}
+              >
                 <Text style={styles.cardButtonText}>Corrent</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.cardButton}>
-              <TouchableOpacity style={styles.incorrect}>
+              <TouchableOpacity
+                style={styles.incorrect}
+                onPress={this.handleSubmit}
+              >
                 <Text style={styles.cardButtonText}>Incorrent</Text>
               </TouchableOpacity>
             </View>
@@ -86,6 +110,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: "center",
     padding: 20,
+  },
+  cardContentAnswerText: {
+    fontSize: 20,
   },
   cardContentSubText: {
     color: "gray",
