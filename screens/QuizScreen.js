@@ -11,6 +11,7 @@ class QuizScreen extends Component {
     frontSide: true,
     rotate: new Animated.Value(0),
     platform: Platform.OS === "ios",
+    userAnswer: [],
   };
 
   handleFlip = () => {
@@ -27,13 +28,24 @@ class QuizScreen extends Component {
   };
 
   handleSubmit = (answer) => {
-    console.log("QuizScreen -> handleSubmit -> answer", answer);
+    const { currentIndex, userAnswer } = this.state;
+    const { questionCount } = this.props;
+    this.setState((state) => ({
+      userAnswer: [...state.userAnswer, answer],
+      currentIndex: state.currentIndex + 1,
+    }));
+
+    if (currentIndex + 1 >= questionCount) {
+      console.log("QuizScreen -> handleSubmit -> questionCount", questionCount);
+      // TODO - route to result page with props
+    }
   };
 
   render() {
     const { currentIndex, frontSide } = this.state;
     const { deck } = this.props;
     const { questions } = deck;
+
     return (
       <View
         style={[
@@ -66,13 +78,17 @@ class QuizScreen extends Component {
             >
               {frontSide === true ? (
                 <Text style={styles.cardContentText}>
-                  {questions[currentIndex].question}
+                  {questions[currentIndex]
+                    ? questions[currentIndex].question
+                    : "Error Ocurred!"}
                 </Text>
               ) : (
                 <Text
                   style={[styles.cardContentText, styles.cardContentAnswerText]}
                 >
-                  {questions[currentIndex].answer}
+                  {questions[currentIndex]
+                    ? questions[currentIndex].answer
+                    : "Error Ocurred!"}
                 </Text>
               )}
               <Text style={styles.cardContentSubText}>
@@ -89,17 +105,17 @@ class QuizScreen extends Component {
             <View style={styles.cardButton}>
               <TouchableOpacity
                 style={styles.correct}
-                onPress={this.handleSubmit}
+                onPress={() => this.handleSubmit("correct")}
               >
-                <Text style={styles.cardButtonText}>Corrent</Text>
+                <Text style={styles.cardButtonText}>Correct</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.cardButton}>
               <TouchableOpacity
                 style={styles.incorrect}
-                onPress={this.handleSubmit}
+                onPress={() => this.handleSubmit("incorrect")}
               >
-                <Text style={styles.cardButtonText}>Incorrent</Text>
+                <Text style={styles.cardButtonText}>Incorrect</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -186,8 +202,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = (decks, { route }) => {
   const title = route.params.title;
   const deck = decks[title];
+  const questionCount = deck.questions.length;
+
   return {
     deck,
+    questionCount,
   };
 };
 
