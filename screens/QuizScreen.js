@@ -55,6 +55,10 @@ class QuizScreen extends Component {
     }
   };
 
+  shouldComponentUpdate(nextProps) {
+    return !!nextProps.deck.questions[this.state.currentIndex];
+  }
+
   render() {
     const { currentIndex, frontSide } = this.state;
     const { deck } = this.props;
@@ -89,7 +93,7 @@ class QuizScreen extends Component {
                 <Text style={styles.cardContentText}>
                   {questions[currentIndex]
                     ? questions[currentIndex].question
-                    : "Error Ocurred!"}
+                    : "Loading..."}
                 </Text>
               ) : (
                 <Text
@@ -97,7 +101,7 @@ class QuizScreen extends Component {
                 >
                   {questions[currentIndex]
                     ? questions[currentIndex].answer
-                    : "Error Ocurred!"}
+                    : "Loading..."}
                 </Text>
               )}
               <Text style={styles.cardContentSubText}>
