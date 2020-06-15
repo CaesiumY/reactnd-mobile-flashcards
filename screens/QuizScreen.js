@@ -61,12 +61,7 @@ class QuizScreen extends Component {
     const { questions } = deck;
 
     return (
-      <View
-        style={[
-          styles.container,
-          { transform: !frontSide ? [{ scaleX: -1 }] : [] },
-        ]}
-      >
+      <View style={[styles.container, !frontSide && styles.cardBack]}>
         <Animated.View
           style={[
             styles.card,
@@ -152,7 +147,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "space-between",
   },
-
+  cardBack: {
+    transform: [{ scaleX: -1 }],
+  },
   cardHeader: {
     flex: 0.25,
     justifyContent: "center",
