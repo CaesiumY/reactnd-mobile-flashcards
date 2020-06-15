@@ -28,17 +28,27 @@ class QuizScreen extends Component {
   };
 
   handleSubmit = (answer) => {
-    const { currentIndex, userAnswer } = this.state;
-    const { questionCount } = this.props;
-    this.setState((state) => ({
-      userAnswer: [...state.userAnswer, answer],
-      currentIndex: state.currentIndex + 1,
-    }));
+    const { questionCount, navigation, title } = this.props;
 
-    if (currentIndex + 1 >= questionCount) {
-      console.log("QuizScreen -> handleSubmit -> questionCount", questionCount);
-      // TODO - route to result page with props
-    }
+    this.setState(
+      (state) => ({
+        userAnswer: [...state.userAnswer, answer],
+        currentIndex: state.currentIndex + 1,
+      }),
+      () => {
+        if (this.state.currentIndex >= questionCount) {
+          const score = this.state.userAnswer.filter(
+            (answer) => answer === "correct"
+          ).length;
+
+          navigation.navigate("Result", {
+            title,
+            score,
+            questionCount,
+          });
+        }
+      }
+    );
   };
 
   render() {
@@ -207,6 +217,7 @@ const mapStateToProps = (decks, { route }) => {
   return {
     deck,
     questionCount,
+    title,
   };
 };
 

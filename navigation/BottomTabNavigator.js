@@ -9,6 +9,7 @@ import Colors, { tintColor } from "../constants/Colors";
 import DeckScreen from "../screens/DeckScreen";
 import AddCardScreen from "../screens/AddCardScreen";
 import QuizScreen from "../screens/QuizScreen";
+import ResultScreen from "../screens/ResultScreen";
 
 const BottomTab = createBottomTabNavigator();
 const DeckStack = createStackNavigator();
@@ -56,6 +57,14 @@ function DeckStackScreen() {
         component={QuizScreen}
         options={({ route }) => ({
           title: `${route.params.title} Quiz`,
+          ...defaultHeaderOptions,
+        })}
+      />
+      <DeckStack.Screen
+        name="Result"
+        component={ResultScreen}
+        options={({ route }) => ({
+          title: `${route.params.title} Quiz - Result`,
           ...defaultHeaderOptions,
         })}
       />
