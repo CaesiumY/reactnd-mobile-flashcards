@@ -35,8 +35,6 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: "white",
   },
   contentContainer: {},
   buttonList: {
