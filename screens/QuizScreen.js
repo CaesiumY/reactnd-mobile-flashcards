@@ -1,19 +1,29 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Animated, Platform } from "react-native";
 import { connect } from "react-redux";
 import { tintColor } from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class QuizScreen extends Component {
   state = {
     currentIndex: 0,
     frontSide: true,
+    rotate: new Animated.Value(0),
+    platform: Platform.OS === "ios",
   };
 
   handleFlip = () => {
+    const { frontSide, platform, rotate } = this.state;
+
     this.setState((state) => ({
       frontSide: !state.frontSide,
     }));
+
+    Animated.spring(rotate, {
+      toValue: Number(frontSide),
+      useNativeDriver: platform,
+    }).start();
   };
 
   handleSubmit = (answer) => {
@@ -25,8 +35,27 @@ class QuizScreen extends Component {
     const { deck } = this.props;
     const { questions } = deck;
     return (
-      <View style={styles.container}>
-        <View style={styles.card}>
+      <View
+        style={[
+          styles.container,
+          { transform: !frontSide ? [{ scaleX: -1 }] : [] },
+        ]}
+      >
+        <Animated.View
+          style={[
+            styles.card,
+            {
+              transform: [
+                {
+                  rotateY: this.state.rotate.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ["0deg", "180deg"],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
           <View style={styles.cardHeader}>
             <Text style={styles.cardHeaderText}>Quiz {currentIndex + 1}.</Text>
           </View>
@@ -46,7 +75,14 @@ class QuizScreen extends Component {
                   {questions[currentIndex].answer}
                 </Text>
               )}
-              <Text style={styles.cardContentSubText}>Touch to Flip!</Text>
+              <Text style={styles.cardContentSubText}>
+                <MaterialCommunityIcons
+                  name="rotate-3d"
+                  size={16}
+                  style={{ padding: 5 }}
+                />
+                Touch to Flip!
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cardButtonContainer}>
@@ -67,7 +103,7 @@ class QuizScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -86,6 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "space-between",
   },
+
   cardHeader: {
     flex: 0.25,
     justifyContent: "center",
@@ -107,12 +144,14 @@ const styles = StyleSheet.create({
   },
   cardContentButton: {},
   cardContentText: {
-    fontSize: 30,
+    fontSize: 35,
     textAlign: "center",
     padding: 20,
+    fontWeight: "bold",
   },
   cardContentAnswerText: {
     fontSize: 20,
+    fontWeight: "normal",
   },
   cardContentSubText: {
     color: "gray",
