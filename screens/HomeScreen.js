@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { colorList } from "../constants/Colors";
+import Constants from "expo-constants";
 
 export class HomeScreen extends Component {
   render() {
@@ -35,12 +36,13 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Constants.statusBarHeight / 2,
   },
   contentContainer: {},
   buttonList: {
     height: 70,
     justifyContent: "center",
-    borderWidth: 2,
+    borderTopWidth: 1,
     borderColor: "white",
   },
   buttonText: {

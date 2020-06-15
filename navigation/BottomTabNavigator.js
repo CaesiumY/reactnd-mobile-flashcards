@@ -64,7 +64,7 @@ function DeckStackScreen() {
         name="Result"
         component={ResultScreen}
         options={({ route }) => ({
-          title: `${route.params.title} Quiz - Result`,
+          title: `${route.params.title} - Result`,
           ...defaultHeaderOptions,
         })}
       />
