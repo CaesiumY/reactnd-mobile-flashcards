@@ -37,7 +37,7 @@ export class AddDeckScreen extends Component {
     // TODO - save title to asyncStorage
 
     this.setState({ value: "", errorMessage: "" });
-    this.props.navigation.navigate("Decks");
+    this.props.navigation.navigate("Deck", { title: value });
   };
 
   render() {
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "red",
+    marginBottom: 25,
   },
 });
 
