@@ -96,7 +96,7 @@ class QuizScreen extends Component {
                 <Text style={styles.cardContentText}>
                   {questions[currentIndex]
                     ? questions[currentIndex].question
-                    : "Loading..."}
+                    : "No Quiz..."}
                 </Text>
               ) : (
                 <Text
@@ -104,7 +104,7 @@ class QuizScreen extends Component {
                 >
                   {questions[currentIndex]
                     ? questions[currentIndex].answer
-                    : "Loading..."}
+                    : "No Quiz..."}
                 </Text>
               )}
               <Text style={styles.cardContentSubText}>
@@ -117,24 +117,26 @@ class QuizScreen extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.cardButtonContainer}>
-            <View style={styles.cardButton}>
-              <TouchableOpacity
-                style={styles.correct}
-                onPress={() => this.handleSubmit("correct")}
-              >
-                <Text style={styles.cardButtonText}>Correct</Text>
-              </TouchableOpacity>
+          {questions[currentIndex] && (
+            <View style={styles.cardButtonContainer}>
+              <View style={styles.cardButton}>
+                <TouchableOpacity
+                  style={styles.correct}
+                  onPress={() => this.handleSubmit("correct")}
+                >
+                  <Text style={styles.cardButtonText}>Correct</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.cardButton}>
+                <TouchableOpacity
+                  style={styles.incorrect}
+                  onPress={() => this.handleSubmit("incorrect")}
+                >
+                  <Text style={styles.cardButtonText}>Incorrect</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.cardButton}>
-              <TouchableOpacity
-                style={styles.incorrect}
-                onPress={() => this.handleSubmit("incorrect")}
-              >
-                <Text style={styles.cardButtonText}>Incorrect</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          )}
         </Animated.View>
       </View>
     );

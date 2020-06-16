@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Animated } from "react-native";
 import { connect } from "react-redux";
 import * as Progress from "react-native-progress";
 import { tintColor } from "../constants/Colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import TextButton from "../components/TextButton";
 
 export class ResultScreen extends Component {
@@ -11,13 +10,13 @@ export class ResultScreen extends Component {
     resultText: "",
     scoreToPercent: 0,
     bounceValue: new Animated.Value(1),
-    opacity: new Animated.Value(0),
     showContents: false,
   };
 
   componentDidMount() {
     const { score, questionCount } = this.props.route.params;
-    const { bounceValue, opacity } = this.state;
+    const { bounceValue } = this.state;
+
     this.setState(
       {
         scoreToPercent: score / questionCount,
@@ -29,12 +28,6 @@ export class ResultScreen extends Component {
       }
     );
 
-    Animated.timing(this.state.opacity, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-
     Animated.sequence([
       Animated.timing(bounceValue, { toValue: 1.05, duration: 400 }),
       Animated.spring(bounceValue, { toValue: 1, friction: 4 }),
@@ -44,7 +37,7 @@ export class ResultScreen extends Component {
   }
 
   render() {
-    const { title, score, questionCount } = this.props.route.params;
+    const { score, questionCount } = this.props.route.params;
     const {
       scoreToPercent,
       resultText,
@@ -143,6 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginLeft: 20,
     marginRight: 20,
+    marginBottom: 15,
   },
 });
 

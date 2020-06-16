@@ -66,6 +66,7 @@ function DeckStackScreen() {
         options={({ route }) => ({
           title: `${route.params.title} - Result`,
           ...defaultHeaderOptions,
+          headerLeft: null,
         })}
       />
     </DeckStack.Navigator>
