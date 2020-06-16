@@ -17,8 +17,13 @@ export class DeckScreen extends Component {
     navigation.navigate("Quiz", { title });
   };
 
+  shouldComponentUpdate(nextProps) {
+    return !!nextProps.deck;
+  }
+
   render() {
-    const { questionCount, navigation, title } = this.props;
+    const { navigation, title, deck } = this.props;
+    const questionCount = deck.questions.length;
 
     return (
       <View style={styles.container}>
@@ -39,7 +44,9 @@ export class DeckScreen extends Component {
           >
             Add Card
           </TextButton>
-          <TextButton onPress={this.handleStart}>Start Quiz</TextButton>
+          {questionCount != 0 && (
+            <TextButton onPress={this.handleStart}>Start Quiz</TextButton>
+          )}
           <TouchableOpacity
             style={styles.removeButton}
             onPress={this.handleDelete}
@@ -85,11 +92,10 @@ const styles = StyleSheet.create({
 const mapStateToProps = (decks, { route }) => {
   const { title } = route.params;
   const deck = decks[title];
-  const questionCount = deck.questions.length;
 
   return {
-    questionCount,
     title,
+    deck,
   };
 };
 
