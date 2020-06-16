@@ -17,8 +17,8 @@ export default InputLayout;
 
 const styles = StyleSheet.create({
   input: {
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 20,
+
     backgroundColor: "white",
     height: 40,
     borderRadius: 2,

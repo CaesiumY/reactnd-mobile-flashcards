@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     padding: 20,
-    marginTop: 25,
-    marginBottom: 25,
   },
   title: {
     textAlign: "center",
