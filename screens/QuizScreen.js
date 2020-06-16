@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { tintColor } from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ResultScreen from "./ResultScreen";
 
 class QuizScreen extends Component {
   state = {
@@ -12,14 +13,19 @@ class QuizScreen extends Component {
     rotate: new Animated.Value(0),
     platform: Platform.OS === "ios",
     userAnswer: [],
+    score: 0,
   };
 
   onRestart = () => {
-    this.setState({
-      currentIndex: 0,
-      frontSide: true,
-      userAnswer: [],
-    });
+    this.setState(
+      {
+        currentIndex: 0,
+        frontSide: true,
+        userAnswer: [],
+        rotate: new Animated.Value(0),
+      },
+      () => console.log(this.state)
+    );
   };
 
   handleFlip = () => {
@@ -36,41 +42,35 @@ class QuizScreen extends Component {
   };
 
   handleSubmit = (answer) => {
-    const { questionCount, navigation, title } = this.props;
-
-    this.setState(
-      (state) => ({
-        userAnswer: [...state.userAnswer, answer],
-        currentIndex: state.currentIndex + 1,
-      }),
-      () => {
-        if (this.state.currentIndex >= questionCount) {
-          const score = this.state.userAnswer.filter(
-            (answer) => answer === "correct"
-          ).length;
-
-          navigation.navigate("Result", {
-            title,
-            score,
-            questionCount,
-          });
-        }
-      }
-    );
+    this.setState((state) => ({
+      userAnswer: [...state.userAnswer, answer],
+      currentIndex: state.currentIndex + 1,
+    }));
 
     if (this.state.frontSide === false) {
       this.handleFlip();
     }
   };
 
-  shouldComponentUpdate(nextProps) {
-    return !!nextProps.deck.questions[this.state.currentIndex];
-  }
-
   render() {
     const { currentIndex, frontSide } = this.state;
-    const { deck, questionCount } = this.props;
+    const { deck, questionCount, title, navigation } = this.props;
     const { questions } = deck;
+
+    if (currentIndex >= questionCount) {
+      const score = this.state.userAnswer.filter(
+        (answer) => answer === "correct"
+      ).length;
+      return (
+        <ResultScreen
+          title={title}
+          score={score}
+          questionCount={questionCount}
+          navigation={navigation}
+          onRestart={this.onRestart}
+        />
+      );
+    }
 
     return (
       <View style={[styles.container, !frontSide && styles.cardBack]}>

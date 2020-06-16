@@ -60,15 +60,6 @@ function DeckStackScreen() {
           ...defaultHeaderOptions,
         })}
       />
-      <DeckStack.Screen
-        name="Result"
-        component={ResultScreen}
-        options={({ route }) => ({
-          title: `${route.params.title} - Result`,
-          ...defaultHeaderOptions,
-          headerLeft: null,
-        })}
-      />
     </DeckStack.Navigator>
   );
 }
