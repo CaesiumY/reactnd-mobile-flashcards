@@ -37,13 +37,14 @@ export class ResultScreen extends Component {
   }
 
   render() {
-    const { score, questionCount } = this.props.route.params;
+    const { title, score, questionCount } = this.props.route.params;
     const {
       scoreToPercent,
       resultText,
       bounceValue,
       showContents,
     } = this.state;
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Animated.View
@@ -79,8 +80,17 @@ export class ResultScreen extends Component {
           </View>
           {showContents && (
             <View style={styles.cardButtonContainer}>
-              <TextButton>Back to Deck</TextButton>
-              <TextButton color="#a29bfe">Restart Quiz</TextButton>
+              <TextButton
+                onPress={() => navigation.navigate("Deck", { title })}
+              >
+                Back to Deck
+              </TextButton>
+              <TextButton
+                onPress={() => navigation.navigate("Quiz", { title })}
+                color="#a29bfe"
+              >
+                Restart Quiz
+              </TextButton>
             </View>
           )}
         </Animated.View>
@@ -140,8 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-export default connect(mapStateToProps)(ResultScreen);
+export default ResultScreen;

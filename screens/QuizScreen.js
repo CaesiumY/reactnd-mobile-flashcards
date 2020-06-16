@@ -14,6 +14,14 @@ class QuizScreen extends Component {
     userAnswer: [],
   };
 
+  onRestart = () => {
+    this.setState({
+      currentIndex: 0,
+      frontSide: true,
+      userAnswer: [],
+    });
+  };
+
   handleFlip = () => {
     const { frontSide, platform, rotate } = this.state;
 
