@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Animated } from "react-native";
 import { connect } from "react-redux";
 import * as Progress from "react-native-progress";
 import { tintColor } from "../constants/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import TextButton from "../components/TextButton";
 
 export class ResultScreen extends Component {
   state = {
@@ -59,27 +61,35 @@ export class ResultScreen extends Component {
           </View>
 
           <View style={styles.cardContent}>
-            {showContents && (
-              <>
-                <View style={styles.progressContainer}>
-                  <Progress.Circle
-                    size={160}
-                    formatText={() => `${scoreToPercent * 100}%`}
-                    animated={true}
-                    progress={scoreToPercent}
-                    showsText={true}
-                    color={tintColor}
-                    borderWidth={5}
-                    thickness={8}
-                  />
-                </View>
-                <Text style={styles.cardContentText}>
-                  {score} / {questionCount}
-                </Text>
-                <Text style={styles.resultText}>{resultText}</Text>
-              </>
-            )}
+            <>
+              <View style={styles.progressContainer}>
+                <Progress.Circle
+                  size={160}
+                  formatText={() => `${scoreToPercent * 100}%`}
+                  animated={true}
+                  progress={scoreToPercent}
+                  showsText={true}
+                  color={tintColor}
+                  borderWidth={5}
+                  thickness={8}
+                />
+              </View>
+              {showContents && (
+                <>
+                  <Text style={styles.cardContentText}>
+                    {score} / {questionCount}
+                  </Text>
+                  <Text style={styles.resultText}>{resultText}</Text>
+                </>
+              )}
+            </>
           </View>
+          {showContents && (
+            <View style={styles.cardButtonContainer}>
+              <TextButton>Back to Deck</TextButton>
+              <TextButton color="#a29bfe">Restart Quiz</TextButton>
+            </View>
+          )}
         </Animated.View>
       </View>
     );
@@ -99,9 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "space-between",
   },
-
   cardHeader: {
-    flex: 0.15,
     justifyContent: "center",
     backgroundColor: tintColor,
     borderTopLeftRadius: 20,
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
   cardHeaderText: {
     color: "white",
     fontWeight: "bold",
-    padding: 5,
+    padding: 10,
     fontSize: 24,
     textAlign: "center",
   },
@@ -130,7 +138,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 35,
     fontWeight: "bold",
-    color: tintColor,
+  },
+  cardButtonContainer: {
+    justifyContent: "space-around",
+    marginLeft: 20,
+    marginRight: 20,
   },
 });
 
