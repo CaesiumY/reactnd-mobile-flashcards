@@ -61,7 +61,7 @@ class QuizScreen extends Component {
 
   render() {
     const { currentIndex, frontSide } = this.state;
-    const { deck } = this.props;
+    const { deck, questionCount } = this.props;
     const { questions } = deck;
 
     return (
@@ -82,7 +82,10 @@ class QuizScreen extends Component {
           ]}
         >
           <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Quiz {currentIndex + 1}.</Text>
+            <Text style={styles.cardHeaderText}>
+              Quiz {questions[currentIndex] ? currentIndex + 1 : "?"} /
+              {questionCount}
+            </Text>
           </View>
           <View style={styles.cardContent}>
             <TouchableOpacity
@@ -173,7 +176,6 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
   },
-  cardContentButton: {},
   cardContentText: {
     fontSize: 35,
     textAlign: "center",
