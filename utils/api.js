@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 
-const DATABASE_KEY = "flash:test";
+const DATABASE_KEY = "flash:decks";
 
 export const getDecks = () => {
   // TODO - return all decks
@@ -8,10 +8,9 @@ export const getDecks = () => {
 };
 
 export const getDeck = (id) => {
-  // TODO - return a single deck which has certain id
   return AsyncStorage.getItem(DATABASE_KEY).then((result) => {
     const parsed = JSON.parse(result);
-    console.log(parsed);
+    return parsed[id];
   });
 };
 
