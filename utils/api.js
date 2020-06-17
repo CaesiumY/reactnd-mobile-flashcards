@@ -4,9 +4,7 @@ const DATABASE_KEY = "flash:test";
 
 export const getDecks = () => {
   // TODO - return all decks
-  return AsyncStorage.getItem(DATABASE_KEY).then((result) =>
-    console.log(result)
-  );
+  return AsyncStorage.getItem(DATABASE_KEY);
 };
 
 export const getDeck = (id) => {

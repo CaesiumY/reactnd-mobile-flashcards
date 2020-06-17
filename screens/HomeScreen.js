@@ -5,10 +5,14 @@ import { connect } from "react-redux";
 import { colorList } from "../constants/Colors";
 import Constants from "expo-constants";
 import { setLocalNotification } from "../utils/helpers";
+import { getDecks } from "../utils/api";
+import { getDecksData } from "../actions";
 
 export class HomeScreen extends Component {
   componentDidMount() {
+    const { dispatch } = this.props;
     setLocalNotification();
+    getDecks().then((results) => dispatch(getDecksData(JSON.parse(results))));
   }
   render() {
     const { DeckTitles, navigation } = this.props;
