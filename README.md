@@ -1,10 +1,10 @@
-# ⚛Udacity React Nanodegree Project - Mobile Flashcards❓
+# ⚛Udacity React Nanodegree Project - Mobile Flashcards🎫
 
 This repo is a code-along with the first project in the [React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
 
 ## 📌Table of Contents
 
-- [⚛Udacity React Nanodegree Project - Mobile Flashcards❓](#udacity-react-nanodegree-project---mobile-flashcards)
+- [⚛Udacity React Nanodegree Project - Mobile Flashcards🎫](#udacity-react-nanodegree-project---mobile-flashcards)
   - [📌Table of Contents](#table-of-contents)
   - [💻Tested Envirionment](#tested-envirionment)
   - [🔰Project Setup](#project-setup)
