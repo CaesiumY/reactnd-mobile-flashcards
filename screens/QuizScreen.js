@@ -17,15 +17,12 @@ class QuizScreen extends Component {
   };
 
   onRestart = () => {
-    this.setState(
-      {
-        currentIndex: 0,
-        frontSide: true,
-        userAnswer: [],
-        rotate: new Animated.Value(0),
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      currentIndex: 0,
+      frontSide: true,
+      userAnswer: [],
+      rotate: new Animated.Value(0),
+    });
   };
 
   handleFlip = () => {

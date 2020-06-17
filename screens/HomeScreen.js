@@ -4,8 +4,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { colorList } from "../constants/Colors";
 import Constants from "expo-constants";
+import { setLocalNotification } from "../utils/helpers";
 
 export class HomeScreen extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     const { DeckTitles, navigation } = this.props;
 

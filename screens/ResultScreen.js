@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as Progress from "react-native-progress";
 import { tintColor } from "../constants/Colors";
 import TextButton from "../components/TextButton";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 export class ResultScreen extends Component {
   state = {
@@ -16,6 +17,8 @@ export class ResultScreen extends Component {
   componentDidMount() {
     const { score, questionCount } = this.props;
     const { bounceValue } = this.state;
+
+    clearLocalNotification().then(setLocalNotification);
 
     this.setState(
       {
