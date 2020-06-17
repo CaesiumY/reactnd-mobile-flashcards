@@ -6,16 +6,16 @@ This repo is a code-along with the first project in the [React Nanodegree progra
 
 - [⚛Udacity React Nanodegree Project - Mobile Flashcards❓](#udacity-react-nanodegree-project---mobile-flashcards)
   - [📌Table of Contents](#table-of-contents)
-  - [💻Test Envirionment](#test-envirionment)
+  - [💻Tested Envirionment](#tested-envirionment)
   - [🔰Project Setup](#project-setup)
   - [📷Screenshots](#screenshots)
   - [👨‍💻Features](#features)
 
-## 💻Test Envirionment
+## 💻Tested Envirionment
 
 - [x] `Android OS`
 - [ ] `ios`
-    - > NOT TESTED
+  -  NOT TESTED
 - [ ] `Web`
 
 ## 🔰Project Setup
@@ -29,42 +29,42 @@ This repo is a code-along with the first project in the [React Nanodegree progra
 
 <details>
     <summary>Add Deck</summary>
-    
+    <img src="./screenshots/add_deck.jpg" width="600">    
 </details>
 <details>
     <summary>Home - Decks</summary>
-    
+    <img src="./screenshots/home.jpg" width="600">    
 </details>
 <details>
     <summary>Deck Screen - No Cards</summary>
-    
+    <img src="./screenshots/deck_screen.jpg" width="600">    
 </details>
 <details>
     <summary>Deck Screen - With Cards</summary>
-    
+    <img src="./screenshots/deck_screen_button.jpg" width="600">    
 </details>
 <details>
     <summary>Add Card</summary>
-    
+    <img src="./screenshots/add_card.jpg" width="600">    
 </details>
 <details>
     <summary>Quiz - Front</summary>
-    
+    <img src="./screenshots/quiz_front.jpg" width="600">    
 </details>
 <details>
     <summary>Quiz - Back</summary>
-    
+    <img src="./screenshots/quiz_back.jpg" width="600">    
 </details>
 <details>
-    <summary>score</summary>
-    
+    <summary>Score</summary>
+    <img src="./screenshots/score.jpg" width="600">    
 </details>
 
 ## 👨‍💻Features
 
-- [ ] Add Deck
-- [ ] Delete Deck
-- [ ] Add Card
-- [ ] Solve Quiz
-- [ ] View Score
-- [ ] Push Local Notification(at 8pm)
+- [x] Add Deck
+- [x] Delete Deck
+- [x] Add Card
+- [x] Solve Quiz
+- [x] View Score
+- [x] Push Local Notification(at 8pm)
