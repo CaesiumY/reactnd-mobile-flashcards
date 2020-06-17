@@ -18,7 +18,6 @@ export const getDeck = (id) => {
 };
 
 export const saveDeckTitle = (title) => {
-  // TODO - add title to the decks object
   return AsyncStorage.mergeItem(
     DATABASE_KEY,
     JSON.stringify({
@@ -31,10 +30,10 @@ export const saveDeckTitle = (title) => {
 };
 
 export const addCardToDeck = (title, question) => {
-  // TODO - add the card object to the deck of title
-  return AsyncStorage.mergeItem(
-    DATABASE_KEY,
-    JSON.stringify({
+  return AsyncStorage.getItem(DATABASE_KEY).then((results) => {
+    let state = JSON.parse(results);
+    state = {
+      ...state,
       [title]: {
         ...state[title],
         questions: [
@@ -45,14 +44,16 @@ export const addCardToDeck = (title, question) => {
           },
         ],
       },
-    })
-  );
+    };
+
+    AsyncStorage.setItem(DATABASE_KEY, JSON.stringify(state));
+  });
 };
 
 export const removeDeck = (title) => {
   return AsyncStorage.getItem(DATABASE_KEY).then((results) => {
     const parsed = JSON.parse(results);
-    delete results[title];
-    AsyncStorage.setItem(DATABASE_KEY, JSON.stringify(results));
+    delete parsed[title];
+    AsyncStorage.setItem(DATABASE_KEY, JSON.stringify(parsed));
   });
 };

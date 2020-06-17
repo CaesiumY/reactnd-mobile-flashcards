@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import TextButton from "../components/TextButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { deleteDeck } from "../actions";
+import { removeDeck } from "../utils/api";
 
 export class DeckScreen extends Component {
   handleDelete = () => {
     const { navigation, dispatch, title } = this.props;
     navigation.popToTop();
     dispatch(deleteDeck(title));
+    removeDeck(title);
   };
 
   handleStart = () => {

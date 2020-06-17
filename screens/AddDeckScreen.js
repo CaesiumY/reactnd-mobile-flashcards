@@ -5,6 +5,7 @@ import TextButton from "../components/TextButton";
 import InputLayout from "../components/InputLayout";
 import { connect } from "react-redux";
 import { createDeck } from "../actions";
+import { saveDeckTitle } from "../utils/api";
 
 export class AddDeckScreen extends Component {
   state = {
@@ -35,6 +36,7 @@ export class AddDeckScreen extends Component {
     dispatch(createDeck(value));
 
     // TODO - save title to asyncStorage
+    saveDeckTitle(value);
 
     this.setState({ value: "", errorMessage: "" });
     this.props.navigation.navigate("Deck", { title: value });

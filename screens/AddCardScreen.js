@@ -4,6 +4,7 @@ import InputLayout from "../components/InputLayout";
 import TextButton from "../components/TextButton";
 import { connect } from "react-redux";
 import { createQuestion } from "../actions";
+import { addCardToDeck } from "../utils/api";
 
 export class AddCardScreen extends Component {
   state = {
@@ -38,7 +39,8 @@ export class AddCardScreen extends Component {
 
     dispatch(createQuestion(title, { question, answer }));
 
-    // // TODO - save title to asyncStorage
+    // TODO - save title to asyncStorage
+    addCardToDeck(title, { question, answer });
 
     this.setState({ question: "", answer: "", errorMessage: "" });
     navigation.goBack();
