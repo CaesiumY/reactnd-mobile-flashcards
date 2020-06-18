@@ -88,7 +88,7 @@ class QuizScreen extends Component {
         >
           <View style={styles.cardHeader}>
             <Text style={styles.cardHeaderText}>
-              Quiz {questions[currentIndex] ? currentIndex + 1 : "?"} /
+              Quiz {questions[currentIndex] ? currentIndex + 1 : "?"} /{" "}
               {questionCount}
             </Text>
           </View>
